@@ -1,7 +1,8 @@
+-----------------------------------------------
 Online Visitor Counter
 -----------------------------------------------
 Simple app created in Django for Online visitor counters, shows unique visitors online by tracking REMOTE_ADDR
------------------------------------------------
+===============================================
 
 How to run :
 
