@@ -5,7 +5,7 @@ Simple app created in Django for Online visitor counters, shows unique visitors 
 ===============================================
 
 How to run :
-
+python manage.py migrate
 python manage.py runserver 
 
 and visit http://127.0.0.1:8000/counter
