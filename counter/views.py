@@ -5,5 +5,11 @@ from counter.models import Counter
 
 # Create your views here.
 def index(request):
-	context = {'online_users': request.online.total}
+	total = Counter.objects.all().count()
+	visitors = Counter.objects.all()
+	context = {'total_online_users': total,'visitors_online':visitors}
 	return render(request, 'counter/index.html',context)
+
+def get_visitor_count(request):
+	total = Counter.objects.all().count()
+	return HttpResponse(total)

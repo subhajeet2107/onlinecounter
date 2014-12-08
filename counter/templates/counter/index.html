@@ -2,9 +2,87 @@
 <html>
 <head>
 	<title>Online Counter</title>
+	<!-- Latest compiled and minified CSS & JS -->
+	<link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script src="//code.jquery.com/jquery.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Shubhajeet</h1>
-<h2>Online counter {{ online_users }}</h2>
+<div class="container">
+<nav class="navbar navbar-default" role="navigation">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#">Online Visitor Counter</a>
+	</div>
+
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse navbar-ex1-collapse">
+		
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="/admin">Login</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div><!-- /.navbar-collapse -->
+</nav>
+	<div class="row">
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Online Visitor Counter</h1>
+				<p>Simple app in Django which shows online visitors on this page.</p>
+	
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+			   Total Visitors Online : <div class="visitor_count">{{ total_online_users }}</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+			   <table class="table table-hover">
+			   	<thead>
+			   		<tr>
+			   			<th>IP</th>
+			   			<th>Last Visited On</th>
+			   		</tr>
+			   	</thead>
+			   	<tbody>
+			   	{% for visitors in visitors_online %}
+			   		<tr>
+			   			<td>{{ visitors.ip }} </td>
+			   			<td>{{ visitors.visited_time}}</td>
+			   		</tr>
+			   	{% endfor %}
+			   	</tbody>
+			   </table>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function refresh() {
+    $.ajax({
+        url: 'http://localhost:8000/counter/get_visitor_count',
+        success: function(data) {
+            $('.visitor_count').html(data);
+        }
+    });
+}
+
+$(function(){
+    refresh();
+    setInterval(refresh(), 1000);
+});
+</script>
 </body>
 </html>
