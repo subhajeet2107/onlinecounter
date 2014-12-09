@@ -70,9 +70,7 @@
 	</div>
 </div>
 <script>
-i=0;
 	function refresh() {
-		i++
     $.ajax({
         url: 'https://onlinevisitors.herokuapp.com/counter/get_visitor_count',
         success: function(data) {
@@ -80,15 +78,12 @@ i=0;
             $('.visitor_count').html(data);
         }
     });
-
-    console.log(i);
+    setInterval(refresh(), 1000);
 }
 
 $(document).ready(function() {
 	//refresh online visitors
 	refresh();
-    setInterval(refresh(), 1000);
-
     v_ip = "{{ curr_ip }}";
 
     $(window).unload(function() {
