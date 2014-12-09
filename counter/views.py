@@ -21,9 +21,6 @@ def get_current_ip(request):
 		ip = x_forwarded_for.split(',')[0]
 	else:
 		ip = request.META.get('REMOTE_ADDR')
-
-	if ip == 'None':
-		ip = ENV['HTTP_X_FORWARDED_FOR']
 		return ip
 
 def end_session(request):

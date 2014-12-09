@@ -82,14 +82,11 @@
 $(function() {
 	//refresh online visitors
 	setInterval(refresh(),3000);
-    v_ip = "{{ curr_ip }}";
-
     $(window).unload(function() {
         $.ajax({
             type: 'POST',
             async:false,
-            url: 'https://onlinevisitors.herokuapp.com/counter/end_session',
-            data: {ip:v_ip}
+            url: 'https://onlinevisitors.herokuapp.com/counter/end_session'
         });
     });
 
