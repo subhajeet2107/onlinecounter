@@ -7,7 +7,8 @@ from counter.models import Counter
 def index(request):
 	total = Counter.objects.all().count()
 	visitors = Counter.objects.all()
-	context = {'total_online_users': total,'visitors_online':visitors}
+	current_ip = get_current_ip(request)
+	context = {'total_online_users': total,'visitors_online':visitors,'curr_ip':current_ip}
 	return render(request, 'counter/index.html',context)
 
 def get_visitor_count(request):
@@ -19,8 +20,8 @@ def get_current_ip(request):
 	if x_forwarded_for:
 		ip = x_forwarded_for.split(',')[0]
 	else:
-        ip = request.META.get('REMOTE_ADDR')
-        return HttpResponse(ip)
+		ip = request.META.get('REMOTE_ADDR')
+		return ip
 
 def end_session(request):
 	v_ip = request.POST.get('ip',False)

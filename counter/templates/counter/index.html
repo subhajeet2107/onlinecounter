@@ -89,7 +89,7 @@ $(document).ready(function() {
 	refresh();
     setInterval(refresh(), 1000);
 
-    v_ip = "127.0.0.1";
+    v_ip = "{{ curr_ip }}";
 
     $(window).unload(function() {
         $.ajax({
