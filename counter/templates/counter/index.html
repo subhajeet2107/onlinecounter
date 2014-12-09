@@ -72,16 +72,32 @@
 <script>
 	function refresh() {
     $.ajax({
-        url: 'http://localhost:8000/counter/get_visitor_count',
+        url: 'http://onlinevisitors.herokuapp.com/counter/get_visitor_count',
         success: function(data) {
             $('.visitor_count').html(data);
         }
     });
 }
 
-$(function(){
-    refresh();
+$(document).ready(function() {
+	//refresh online visitors
+	refresh();
     setInterval(refresh(), 1000);
+
+    var teid = TEID;
+    var startTime = new Date().getTime();
+
+    $(window).unload(function() {
+        var timeSpentMilliseconds = new Date().getTime() - startTime;
+        var t = timeSpentMilliseconds / 1000 / 60;
+
+        $.ajax({
+            type: 'POST',
+            url: '/clientarea/utils/record-time',
+            data: 'teid=' + teid + '&t=' + t
+        });
+    });
+
 });
 </script>
 </body>
