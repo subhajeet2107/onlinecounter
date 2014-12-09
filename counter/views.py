@@ -20,7 +20,7 @@ def get_current_ip(request):
 	if x_forwarded_for:
 		ip = x_forwarded_for.split(',')[0]
 	else:
-		ip = request.environ['REMOTE_ADDR']
+		ip = request.META.get('REMOTE_ADDR')
 		return ip
 
 def end_session(request):
