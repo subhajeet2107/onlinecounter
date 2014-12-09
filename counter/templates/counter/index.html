@@ -74,6 +74,7 @@
     $.ajax({
         url: 'https://onlinevisitors.herokuapp.com/counter/get_visitor_count',
         success: function(data) {
+        	console.log(data);
             $('.visitor_count').html(data);
         }
     });
