@@ -13,3 +13,7 @@ def index(request):
 def get_visitor_count(request):
 	total = Counter.objects.all().count()
 	return HttpResponse(total)
+
+def end_session(request):
+	Counter.objects.filter(ip=request.get('ip')).delete()
+	return HttpResponse(true)

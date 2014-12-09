@@ -72,7 +72,7 @@
 <script>
 	function refresh() {
     $.ajax({
-        url: 'http://onlinevisitors.herokuapp.com/counter/get_visitor_count',
+        url: 'https://onlinevisitors.herokuapp.com/counter/get_visitor_count',
         success: function(data) {
             $('.visitor_count').html(data);
         }
@@ -84,17 +84,14 @@ $(document).ready(function() {
 	refresh();
     setInterval(refresh(), 1000);
 
-    var teid = TEID;
-    var startTime = new Date().getTime();
+    var v_ip = "127.0.0.1";
 
     $(window).unload(function() {
-        var timeSpentMilliseconds = new Date().getTime() - startTime;
-        var t = timeSpentMilliseconds / 1000 / 60;
-
         $.ajax({
             type: 'POST',
-            url: '/clientarea/utils/record-time',
-            data: 'teid=' + teid + '&t=' + t
+            async:false,
+            url: 'https://onlinevisitors.herokuapp.com/counter/end_session',
+            data: 'ip=' + v_ip
         });
     });
 
