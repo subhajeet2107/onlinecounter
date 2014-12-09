@@ -22,7 +22,7 @@ def get_current_ip(request):
 	else:
 		ip = request.META.get('REMOTE_ADDR')
 
-	if ip is 'None'
+	if ip == 'None':
 		ip = ENV['HTTP_X_FORWARDED_FOR']
 		return ip
 
