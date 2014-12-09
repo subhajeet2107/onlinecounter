@@ -24,6 +24,6 @@ def get_current_ip(request):
 		return ip
 
 def end_session(request):
-	v_ip = request.POST.get('ip',False)
+	v_ip = get_current_ip(request)
 	Counter.objects.filter(ip=v_ip).delete()
 	return HttpResponse(v_ip)
