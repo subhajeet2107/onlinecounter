@@ -15,5 +15,6 @@ def get_visitor_count(request):
 	return HttpResponse(total)
 
 def end_session(request):
-	Counter.objects.filter(ip=request.get('ip')).delete()
+	v_ip = request.POST['ip']
+	Counter.objects.filter(ip=v_ip).delete()
 	return HttpResponse(true)
