@@ -85,14 +85,14 @@ $(document).ready(function() {
 	refresh();
     setInterval(refresh(), 1000);
 
-    var v_ip = "127.0.0.1";
+    v_ip = "127.0.0.1";
 
     $(window).unload(function() {
         $.ajax({
             type: 'POST',
             async:false,
             url: 'https://onlinevisitors.herokuapp.com/counter/end_session',
-            data: 'ip=' + v_ip
+            data: {ip:v_ip}
         });
     });
 
