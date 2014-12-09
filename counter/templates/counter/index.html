@@ -74,11 +74,10 @@
     $.ajax({
         url: 'https://onlinevisitors.herokuapp.com/counter/get_visitor_count',
         success: function(data) {
-        	console.log(data);
             $('.visitor_count').html(data);
         }
     });
-    setInterval(refresh(), 50000);
+    setInterval(refresh(), 500000);
 }
 
 $(document).ready(function() {
